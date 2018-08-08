@@ -1,0 +1,3 @@
+mysql --password=markmark -e "use comicsdb; insert into comicslist values ('Anime Arcadia', 'arcadia.gif', 'http://www.animearcadia.com/index.php?p=2')"
+mysql --password=markmark -e "use comicsdb; insert into comicslist values ('Engrish', 'engrish.jpg', 'http://www.engrish.com')"
+mysql --password=markmark -e "use comicsdb; insert into comicslist values ('Ripleys', 'rip.jpg', 'http://www.comics.com/comics/ripleys/index.html')"

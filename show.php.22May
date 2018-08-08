@@ -1,0 +1,46 @@
+<?
+include("conf.php");
+
+Header("Cache-Control: must-revalidate");
+$offset = 60 * 60 * 12 * 0;
+$ExpStr = "Expires: " . gmdate("D, d M Y H:i:s", time() + $offset) . " GMT";
+Header($ExpStr);
+
+$user1 = $_GET['user1'];
+$table = "main";
+
+$conn = mysql_connect($host, $user, $pass) or die(mysql_error());
+$db = mysql_select_db($database, $conn) or die(mysql_error());
+$sql = "SELECT * from $table where user = '$user1' order by order1";
+#$sql = "SELECT * from $table";
+$result = mysql_query($sql,$conn);
+while ($row = mysql_fetch_array($result)){
+        $comic1 = $row['comic1'];
+	$comic2 = $row['comic2'];
+	$website = $row['website'];
+
+	$display .= "<br>$comic1
+	             <br>
+	             <a href='$website'><img src=$comic2 border=none alt='Picture Not Available'></a><br>";
+									  };
+									  
+?>
+
+<html>
+<head>
+<? echo "<title>$user1's Comics</title>"; ?>
+</head>
+
+<body bgcolor=#555555 text=white link=white vlink=white alink=white>
+<center><a href="index.php">Comics main</a> | <a href="/">Home</a> | <a href="edit.php?user1=<?echo $user1?>">Profile</a> 
+<br>
+<br>
+<font color=yellow>New Comic Available! <a href=http://www.elusive-concept.com/current.htm target=_new>Operation Elusive Concept</a>. To add this comic to your list <a href="edit.php?user1=<?echo $user1?>">Click Here</a><br></font>
+<font color=yellow>New Comic Available! <a href=http://www.abstractgender.com target=_new>Abstract Gender</a>. To add this comic to your list <a href="edit.php?user1=<?echo $user1?>">Click Here</a><br></font>
+<font color=yellow>New Comic Available! <a href="http://http://bit-bucket.com/" target=_new>Too much Information</a>. To add this comic to your list <a href="edit.php?user1=<?echo $user1?>">Click Here</a><br></font>
+<font color=yellow>New Comic Available! <a href="http://freefall.purrsia.com/default.htm" target=_new>Freefall</a>. To add this comic to your list <a href="edit.php?user1=<?echo $user1?>">Click Here</a><br></font>
+<br><br>
+<font color=yellow><strong>Attention: a few comics have been broken recently, www.ucomics.com has changed some of their comics, making it more difficult to pull. These comics will return once I discover how to pull the new picture. </strong></font><br>
+<br><br>
+<? echo $display; ?>
+	
